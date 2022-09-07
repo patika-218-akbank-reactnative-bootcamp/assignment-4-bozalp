@@ -1,19 +1,26 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 
-const MovieLine = ({ movies }) => {
+const MovieLine = ({ navigation, movies }) => {
+
+    function goToMovieDetails() {
+        navigation.navigate("MovieDetails", movies.id);
+    }
+
     return (
-        <View style={styles.container}>
-            <Image source={{ uri: 'http://image.tmdb.org/t/p/w500/' + movies.poster_path }} style={styles.image} />
-            <View style={styles.text_area}>
-                <Text style={styles.title}>
-                    {movies.title}
-                </Text>
-                <Text>
-                    {movies.vote_average}/10
-                </Text>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => goToMovieDetails()}>
+            <View style={styles.container}>
+                <Image source={{ uri: 'http://image.tmdb.org/t/p/w500/' + movies.poster_path }} style={styles.image} />
+                <View style={styles.text_area}>
+                    <Text style={styles.title}>
+                        {movies.title}
+                    </Text>
+                    <Text>
+                        {movies.vote_average}/10
+                    </Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

@@ -7,7 +7,7 @@ import SettingsScreen from './Settings/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
-const Home = () => {
+const Home = ({ navigation }) => {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Movies" component={Movies} />
