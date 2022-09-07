@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "optionName": "Top Rated",
+        "optionLink": "top_rated"
+    },   
+    {
+        "id": 2,
+        "optionName": "Popular",
+        "optionLink": "popular"
+    },
+    {
+        "id": 3,
+        "optionName": "Upcoming",
+        "optionLink": "upcoming"
+    },
+    {
+        "id": 1,
+        "optionName": "Latest",
+        "optionLink": "latest"
+    }
+]

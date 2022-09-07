@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import MovieLine from '../Components/MovieLine';
+import MovieTabs from '../Components/movieTabs.json';
 
 const TopRatedURL = 'https://api.themoviedb.org/3/movie/top_rated?api_key=1708682720c29ece63d8f2978de76728';
+
 const Movies = () => {
 
     const [moviesList, setMoviesList] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [selectedTab, setSelectedTab] = useState(MovieTabs[0].optionLink);
 
     async function fetchData() {
         try {
-            const response = await axios.get(TopRatedURL);
+            const response = await axios
+                .get('https://api.themoviedb.org/3/movie/' + selectedTab + '?api_key=1708682720c29ece63d8f2978de76728');
             setLoading(false);
             //console.log(response.data.results[0].title);
             //console.log(typeof response.data.results);
@@ -24,7 +28,12 @@ const Movies = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [selectedTab]);
+
+    function selectTab(optionName) {
+        const selected = MovieTabs.filter(tabName => tabName.optionName === optionName);
+        setSelectedTab(selected[0].optionLink);
+    }
 
     const renderMovies = ({ item }) => <MovieLine movies={item} />
 
@@ -34,6 +43,25 @@ const Movies = () => {
                 loading ? <ActivityIndicator size={"large"} />
                     :
                     <FlatList
+                        ListHeaderComponent={
+
+                            <View style={styles.container_header}>
+                                <FlatList horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                    data={MovieTabs}
+                                    renderItem={({ item }) =>
+                                        <TouchableOpacity style={[{ borderRadius: 5, borderWidth: 1, },
+                                            selectedTab===item.optionLink?styles.selected_button: styles.buttons]}
+                                            activeOpacity={0.7} onPress={() => selectTab(item.optionName)}>
+                                            <Text>
+                                                {item.optionName}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    } />
+                            </View>
+
+
+                        }
                         data={moviesList}
                         renderItem={renderMovies}
                     />
@@ -48,6 +76,28 @@ const styles = StyleSheet.create(
         {
             flex: 1,
             padding: 10,
+        },
+        container_header:
+        {
+            height: 50,
+            marginBottom: 10,
+        },
+        buttons:
+        {
+            width: 100,
+            height: 40,
+            marginRight: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        selected_button:
+        {
+            width: 100,
+            height: 40,
+            marginRight: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor:'gray'
         }
     }
 )
