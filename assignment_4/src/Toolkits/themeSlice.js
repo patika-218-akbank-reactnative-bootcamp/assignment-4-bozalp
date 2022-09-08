@@ -13,9 +13,6 @@ export const themeSlice = createSlice(
         name: 'Theme',
         initialState, //ya da initialState:initialState
         reducers: {
-            setTheme: (state, action) => {
-                
-            },
             setDark: (state) => {
                 state.theme = darkTheme
             },

@@ -46,7 +46,6 @@ const MoviesList = ({ navigation }) => {
                     :
                     <FlatList
                         ListHeaderComponent={
-
                             <View style={styles.container_header}>
                                 <FlatList horizontal={true}
                                     showsHorizontalScrollIndicator={false}
@@ -63,8 +62,6 @@ const MoviesList = ({ navigation }) => {
                                         </TouchableOpacity>
                                     } />
                             </View>
-
-
                         }
                         data={moviesList}
                         renderItem={renderMovies}
@@ -101,7 +98,7 @@ const styles = StyleSheet.create(
             marginRight: 10,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'gray'
+            backgroundColor: 'lightgray'
         }
     }
 )

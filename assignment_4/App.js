@@ -13,6 +13,7 @@ import Home from "./src/Pages/Home";
 import Search from "./src/Pages/Search";
 import SettingsScreen from "./src/Pages/Settings/SettingsScreen";
 import SplashScreen from "./src/Pages/SplashScreen";
+import SignUp from "./src/Pages/SignUp";
 
 import { Provider} from 'react-redux';
 import { store } from "./src/Toolkits/store";
@@ -26,18 +27,6 @@ import darkTheme from './src/Themes/dark';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  //const theme = useSelector((state) => state.theme.theme);
-  //const dispatch = useDispatch();
-
- /* const getTheme = async () => {
-    const value = await AsyncStorage.getItem('theme');
-    value === lightTheme ? dispatch(setDark()) : dispatch(setLight());
-    //setTheme(value === null || value === 'light' ? lightTheme : darkTheme);
-  };*/
-
- /* useEffect(() => {
-    getTheme();
-  }, []);*/
 
   return (
     <Provider store={store}>

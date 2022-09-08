@@ -14,11 +14,11 @@ const Theme = ({ navigation }) => {
 
     function changeTheme() {
         theme === lightTheme ? dispatch(setDark()) : dispatch(setLight());
-        //setThemeStorage();
+        setThemeStorage();
     }
 
     const setThemeStorage = async () => {
-        await AsyncStorage.setItem('theme', theme === lightTheme ? lightTheme : darkTheme);
+        await AsyncStorage.setItem('theme', theme === lightTheme ? 'light' : 'dark');
     };
 
     return (
