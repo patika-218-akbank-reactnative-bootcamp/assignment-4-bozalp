@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View, Image, Alert } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import axios from 'axios';
 
 const MovieDetails = ({ route }) => {
@@ -16,7 +16,6 @@ const MovieDetails = ({ route }) => {
                 .get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=1708682720c29ece63d8f2978de76728');
             setLoading(false);
             setSelectedMovie(response.data);
-            //setVote(selectedMovie.vote_average * 10);
         }
         catch (error) {
             console.log(error.toString());
@@ -25,7 +24,6 @@ const MovieDetails = ({ route }) => {
 
     useEffect(() => {
         fetchData();
-        //Alert.alert(selectedMovie.vote_average);
     }, []);
 
 
@@ -34,7 +32,7 @@ const MovieDetails = ({ route }) => {
         <View style={styles.container}>
             {
                 loading ? <ActivityIndicator size={"large"} /> :
-                    <View >
+                    <ScrollView >
                         <Image source={{ uri: 'http://image.tmdb.org/t/p/w500/' + selectedMovie.poster_path }} style={styles.image} />
                         <Text style={styles.title}>
                             {selectedMovie.title}
@@ -43,20 +41,15 @@ const MovieDetails = ({ route }) => {
                             {selectedMovie.overview}
                         </Text>
 
-                        <View style={styles.vote_area}>
-                            <Text>
-                                Vote Avarage
+                        <View>
+                            <Text style={styles.vote_text}>
+                                Popularity {selectedMovie.popularity}
                             </Text>
-                            <View style={styles.stars} >
-                                <View
-                                    style={[styles.stars_bg, { width: selectedMovie.vote_average * 10 }]}
-                                />
-                            </View>
-                            <Text>
-                                {selectedMovie.vote_average * 10}%
+                            <Text style={styles.vote_text}>
+                                Vote Avarage {selectedMovie.vote_average}
                             </Text>
                         </View>
-                    </View>
+                    </ScrollView>
             }
 
         </View>
@@ -72,16 +65,17 @@ const styles = StyleSheet.create(
         },
         image:
         {
-            width: 100,
-            height: 100,
+            width: 200,
+            height: 200,
             borderRadius: 10,
             resizeMode: 'contain',
             marginRight: 10,
+            alignSelf: 'center'
         },
-        vote_area:
+        vote_text:
         {
-            flexDirection: 'row',
-            padding: 10,
+            paddingTop: 10,
+            fontWeight: '800',
         },
         stars:
         {

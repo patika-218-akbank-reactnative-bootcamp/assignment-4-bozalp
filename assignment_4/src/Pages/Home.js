@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Movies from './Movies';
 import Search from './Search';
-import SettingsScreen from './Settings/SettingsScreen';
+import SettingStack from './Settings/SettingStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +12,11 @@ const Home = ({ navigation }) => {
         <Tab.Navigator>
             <Tab.Screen name="Movies" component={Movies} />
             <Tab.Screen name="Search" component={Search} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="SettingStack" component={SettingStack}
+                options={{
+                    title: "Settings",
+                    tabBarLabel: 'Settings',
+                }} />
         </Tab.Navigator>
     );
 }
