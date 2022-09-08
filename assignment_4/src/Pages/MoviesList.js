@@ -52,7 +52,7 @@ const MoviesList = ({ navigation }) => {
                                     showsHorizontalScrollIndicator={false}
                                     data={MovieTabs}
                                     renderItem={({ item }) =>
-                                        <TouchableOpacity style={[{ borderRadius: 5, borderWidth: 1, },
+                                        <TouchableOpacity style={[{ borderRadius: 15, borderWidth: 1, },
                                         selectedTab === item.optionLink ?
                                             [styles.selected_button, { borderColor: theme.color }] :
                                             [styles.buttons, { borderColor: theme.color }]]}

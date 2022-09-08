@@ -4,21 +4,22 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-na
 import { useSelector, useDispatch } from 'react-redux';
 import { setDark, setLight } from '../../Toolkits/themeSlice';
 import lightTheme from '../../Themes/light';
-//import AsyncStorage from '@react-native-async-storage/async-storage';
+import darkTheme from '../../Themes/dark';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Theme = ({ navigation }) => {
     const theme = useSelector((state) => state.theme.theme);
-     const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     function changeTheme() {
         theme === lightTheme ? dispatch(setDark()) : dispatch(setLight());
-        // Alert.alert(theme.title);
         //setThemeStorage();
     }
 
-    /* const setThemeStorage = async () => {
-         await AsyncStorage.setItem('theme', theme === lightTheme ? 'dark' : 'light');
-     };*/
+    const setThemeStorage = async () => {
+        await AsyncStorage.setItem('theme', theme === lightTheme ? lightTheme : darkTheme);
+    };
 
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
