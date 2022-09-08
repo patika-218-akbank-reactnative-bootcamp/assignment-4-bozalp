@@ -3,8 +3,10 @@ import { Text, View, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity, 
 import axios from 'axios';
 import MovieLine from '../Components/MovieLine';
 import MovieTabs from '../Components/movieTabs.json';
+import { useSelector } from 'react-redux';
 
 const MoviesList = ({ navigation }) => {
+    const theme = useSelector((state) => state.theme.theme);
 
     const [moviesList, setMoviesList] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ const MoviesList = ({ navigation }) => {
     const renderMovies = ({ item }) => <MovieLine navigation={navigation} movies={item} />
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
             {
                 loading ? <ActivityIndicator size={"large"} />
                     :
@@ -51,9 +53,11 @@ const MoviesList = ({ navigation }) => {
                                     data={MovieTabs}
                                     renderItem={({ item }) =>
                                         <TouchableOpacity style={[{ borderRadius: 5, borderWidth: 1, },
-                                        selectedTab === item.optionLink ? styles.selected_button : styles.buttons]}
+                                        selectedTab === item.optionLink ?
+                                            [styles.selected_button, { borderColor: theme.color }] :
+                                            [styles.buttons, { borderColor: theme.color }]]}
                                             activeOpacity={0.7} onPress={() => selectTab(item.optionName)}>
-                                            <Text>
+                                            <Text style={[styles.title, { color: theme.color }]}>
                                                 {item.optionName}
                                             </Text>
                                         </TouchableOpacity>

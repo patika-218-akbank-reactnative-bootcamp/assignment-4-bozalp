@@ -1,7 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const MovieLine = ({ navigation, movies }) => {
+    const theme = useSelector((state) => state.theme.theme);
 
     //Tikladigim filmin id verisini detail sayfasina yolluyorum.
     function goToMovieDetails() {
@@ -13,10 +15,10 @@ const MovieLine = ({ navigation, movies }) => {
             <View style={styles.container}>
                 <Image source={{ uri: 'http://image.tmdb.org/t/p/w500/' + movies.poster_path }} style={styles.image} />
                 <View style={styles.text_area}>
-                    <Text style={styles.title}>
+                    <Text style={[styles.title, { color: theme.color }]}>
                         {movies.title}
                     </Text>
-                    <Text>
+                    <Text style={{ color: theme.color }}>
                         {movies.vote_average}/10
                     </Text>
                 </View>

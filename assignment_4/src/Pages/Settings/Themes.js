@@ -1,28 +1,40 @@
 import React, { useContext, useEffect } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setDark, setLight } from '../../Toolkits/themeSlice';
+import lightTheme from '../../Themes/light';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Theme = ({ navigation }) => {
+    const theme = useSelector((state) => state.theme.theme);
+     const dispatch = useDispatch();
 
-
-    /*const { theme, setTheme } = useContext(ThemeContext);
-    function changeTheme() {        
-        theme.title === 'light' ? setTheme(darkTheme) : setTheme(lightTheme);
-        setThemeStorage();
-    }*/
+    function changeTheme() {
+        theme === lightTheme ? dispatch(setDark()) : dispatch(setLight());
+        // Alert.alert(theme.title);
+        //setThemeStorage();
+    }
 
     /* const setThemeStorage = async () => {
          await AsyncStorage.setItem('theme', theme === lightTheme ? 'dark' : 'light');
      };*/
 
     return (
-        <View>
-            <Text style={[styles.header, { color: 'black' }]}>Theme Setting</Text>
-            <Image
-                source={require('../../images/darkMode.png')}
-                style={styles.button_image} />
+        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+            <Text style={[styles.header, { color: theme.color }]}>Theme Setting</Text>
+            <View style={styles.button}>
+                <TouchableOpacity onPress={() => changeTheme()}>
+                    <Image
+                        source={theme.title === 'light' ? require('../../images/darkMode.png') :
+                            require('../../images/lightMode.png')
+                        }
+                        style={styles.button_image} />
+                </TouchableOpacity>
+                <Text style={{ color: theme.color, paddingTop: 10 }}>
+                    {theme.title === 'light' ? "Dark Mode" : "Light Mode"}
+                </Text>
+            </View>
         </View>
     );
 }

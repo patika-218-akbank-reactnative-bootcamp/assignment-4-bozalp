@@ -14,18 +14,23 @@ import Search from "./src/Pages/Search";
 import SettingsScreen from "./src/Pages/Settings/SettingsScreen";
 import SplashScreen from "./src/Pages/SplashScreen";
 
+import { store } from "./src/Toolkits/store";
+import { Provider } from 'react-redux';
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="Home" component={Home} options={{
-              headerShown: false
-            }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="SplashScreen" component={SplashScreen} />
+          <Stack.Screen name="Home" component={Home} options={{
+            headerShown: false
+          }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 

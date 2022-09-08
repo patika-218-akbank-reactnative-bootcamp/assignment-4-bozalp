@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const MovieDetails = ({ route }) => {
+    const theme = useSelector((state) => state.theme.theme);
 
     //MovieLine kisminda tikladigimiz filmin id verisini degiskene atip fetch data ile cekiyorum.
     const movieId = route.params;
@@ -29,23 +31,23 @@ const MovieDetails = ({ route }) => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
             {
                 loading ? <ActivityIndicator size={"large"} /> :
                     <ScrollView >
                         <Image source={{ uri: 'http://image.tmdb.org/t/p/w500/' + selectedMovie.poster_path }} style={styles.image} />
-                        <Text style={styles.title}>
+                        <Text style={[styles.title, { color: theme.color }]}>
                             {selectedMovie.title}
                         </Text>
-                        <Text>
+                        <Text style={{ color: theme.color }}>
                             {selectedMovie.overview}
                         </Text>
 
                         <View>
-                            <Text style={styles.vote_text}>
+                            <Text style={[styles.vote_text, { color: theme.color }]}>
                                 Popularity {selectedMovie.popularity}
                             </Text>
-                            <Text style={styles.vote_text}>
+                            <Text style={[styles.vote_text, { color: theme.color }]}>
                                 Vote Avarage {selectedMovie.vote_average}
                             </Text>
                         </View>
@@ -76,20 +78,6 @@ const styles = StyleSheet.create(
         {
             paddingTop: 10,
             fontWeight: '800',
-        },
-        stars:
-        {
-            width: 100,
-            height: 25,
-            backgroundColor: 'gray',
-            marginLeft: 10,
-            marginRight: 10,
-            justifyContent: 'center'
-        },
-        stars_bg:
-        {
-            height: 25,
-            backgroundColor: '#21d07a',
         },
         title:
         {
