@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Alert, ActivityIndicator, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Alert, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import TextBox from '../Components/TextBox';
 import Buttons from '../Components/Buttons';
 import axios from 'axios';
 import MovieLine from '../Components/MovieLine';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import NewIcon from 'react-native-vector-icons/Ionicons';
 
 const Search = ({ navigation }) => {
     const theme = useSelector((state) => state.theme.theme);
@@ -38,9 +41,13 @@ const Search = ({ navigation }) => {
                             <View style={styles.textbox}>
                                 <TextBox title={"Movie Name"} value={searchedMovie} onChangeText={setMovie} />
                             </View>
-                            <View style={styles.button}>
-                                <Buttons title={"Search"} onPress={() => { fetchsearchMovieData() }} />
-                            </View>
+
+                            <TouchableOpacity activeOpacity={0.7} onPress={() => { fetchsearchMovieData() }}
+                                style={[styles.button, { borderWidth: 1, borderColor: theme.color }]}>
+                                <NewIcon name='search' size={28} color={theme.color} />
+                            </TouchableOpacity>
+
+
                         </View>
                     }
                     data={searchedMoviesList}
@@ -59,17 +66,22 @@ const styles = StyleSheet.create(
         header_container:
         {
             flexDirection: 'row',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingBottom:20
         },
         button:
         {
-            flex: 1,
+            flex:1,
             alignItems: 'center',
-            paddingBottom: 20
+            height: 48,
+            width: 48,
+            borderRadius:5,
+            paddingTop:5
         },
         textbox:
         {
-            flex: 3,
+            flex: 5,
+            paddingRight:10,
         }
     }
 )

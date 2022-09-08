@@ -9,7 +9,7 @@ const TextBox = ({ title, value, onChangeText, numeric }) => {
         <TextInput
             style={{
                 backgroundColor: theme.grayBackground, color: theme.color,
-                borderRadius: 5, marginBottom: 10, borderColor: theme.color, borderWidth: 1
+                borderRadius: 5, borderColor: theme.color, borderWidth: 1
             }}
             onChangeText={onChangeText}
             value={value}
