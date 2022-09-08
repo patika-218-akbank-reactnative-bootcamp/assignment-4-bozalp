@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const MovieDetails = ({ route }) => {
 
+    //MovieLine kisminda tikladigimiz filmin id verisini degiskene atip fetch data ile cekiyorum.
     const movieId = route.params;
 
     const [selectedMovie, setSelectedMovie] = useState([]);

@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Image, TouchableOpacity, Alert } from 'react-na
 
 const MovieLine = ({ navigation, movies }) => {
 
+    //Tikladigim filmin id verisini detail sayfasina yolluyorum.
     function goToMovieDetails() {
         navigation.navigate("MovieDetails", movies.id);
     }

@@ -4,12 +4,11 @@ import axios from 'axios';
 import MovieLine from '../Components/MovieLine';
 import MovieTabs from '../Components/movieTabs.json';
 
-const TopRatedURL = 'https://api.themoviedb.org/3/movie/top_rated?api_key=1708682720c29ece63d8f2978de76728';
-
 const MoviesList = ({ navigation }) => {
 
     const [moviesList, setMoviesList] = useState([]);
     const [loading, setLoading] = useState(true);
+    //sekmeler icin json olusturdum. default olarak json'un ilk degerini atadim.
     const [selectedTab, setSelectedTab] = useState(MovieTabs[0].optionLink);
 
     async function fetchData() {
@@ -25,11 +24,12 @@ const MoviesList = ({ navigation }) => {
             console.log(error.toString());
         }
     }
-
+    //ilk acildiginda selectedTab guncelleniyor. Ya da selectedTab degistiginde baska bir fetch islemi yapiyorum.
     useEffect(() => {
         fetchData();
     }, [selectedTab]);
 
+    //secilen sekmenin ismini aliyorum. fetchData kismindaki selectedTab degerine gore guncelliyorum.
     function selectTab(optionName) {
         const selected = MovieTabs.filter(tabName => tabName.optionName === optionName);
         setSelectedTab(selected[0].optionLink);
